@@ -44,3 +44,11 @@ describe("alias thinking levels", () => {
     expect(request.thinking).toBe("low");
   });
 });
+
+describe("persistSession passthrough", () => {
+  it("preserves an explicit boolean and rejects non-boolean values", () => {
+    expect(normalizeAgentRunRequest({ task: "t", persistSession: true }, defaults).persistSession).toBe(true);
+    expect(normalizeAgentRunRequest({ task: "t", persistSession: false }, defaults).persistSession).toBe(false);
+    expect(normalizeAgentRunRequest({ task: "t", persistSession: "true" }, defaults).persistSession).toBeUndefined();
+  });
+});
